@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+<script>
+    document.querySelector(‘input[name=expression]‘).addEventListener(‘keyup‘, function(e) {
+        if (e.key === ‘Enter‘) {
+            document.querySelector(‘button[type=submit]‘).click();
+        }
+    });
+</script>
+
+</head>
+<body>
+    <p> 从能量计算波数 </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="expression" required>
+
+        <button type="submit">计算</button>
+	<button type="button", onclick="document.querySelector('input[name=expression]').value = ''"> 清空 </button>
+    </form>
+    <h2>结果为: {{ result }} cm-1</h2>
+</body>
+</html>
+
