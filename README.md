@@ -14,7 +14,7 @@ After=network.target
 [Service]
 User=root
 # 项目文件目录
-WorkingDirectory=<dir>/phycalc/physol/
+WorkingDirectory=</home/ming/repos>/physol/physol/
 # gunicorn启动命令
 ExecStart=/usr/bin/gunicorn  -w 2 physol.wsgi
 # 错误重启
