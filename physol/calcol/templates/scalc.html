@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <p> 从能量计算波数 </p>
+    <h2> 从能量(eV)计算波长(nm) </h2>
     <form method="post">
         {% csrf_token %}
         <input type="text" name="expression" required>
@@ -21,7 +21,9 @@
         <button type="submit">计算</button>
 	<button type="button", onclick="document.querySelector('input[name=expression]').value = ''"> 清空 </button>
     </form>
-    <h2>结果为: {{ result }} cm-1</h2>
+    <p>结果为: {{ result }} cm-1</p>
+
+
 </body>
 </html>
 
