@@ -68,3 +68,7 @@ def scalc(request):
             context = {}
 
     return render(request, 'scalc.html', context)
+
+def index(request):
+    return render(request, 'index.html')
+
