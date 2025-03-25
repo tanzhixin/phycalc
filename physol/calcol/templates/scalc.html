@@ -16,13 +16,20 @@
     <h2> 从能量(eV)计算波长(nm) </h2>
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="expression" required>
-
+        <input type="text" name="ev1" required>
         <button type="submit">计算</button>
-	<button type="button", onclick="document.querySelector('input[name=expression]').value = ''"> 清空 </button>
+	<button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
     </form>
-    <p>结果为: {{ result }} cm-1</p>
+    <p>结果为: {{ result1 }} nm</p>
 
+    <h2> 从能量(eV)计算波长(nm) </h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="ev2" required>
+      <button type="submit">计算</button>
+      <button type="button", onclick="document.querySelector('input[name=ev2]').value = ''"> 清空 </button>
+    </form>
+    <p>结果为: {{ result2 }} cm-1</p>
 
 </body>
 </html>

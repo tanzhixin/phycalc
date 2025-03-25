@@ -20,38 +20,51 @@ def lambda_nm2energy_eV(lbda):               # input photon wavelength in nm
     energy_eV = planck*light_c/(lbda*1.0e-9)/e_chargenumber
     return(energy_eV, ' eV')
 
-def energy_ev2wavenumber_cm1(en_eV):         # 
+def energy_ev2wavenumber_cm1(en_eV):         #
+    en_float = float(en_eV)
     planck = scipy.constants.Planck
     light_c = scipy.constants.speed_of_light
     e_chargenumber = scipy.constants.e
-    lbda =  planck*light_c/(en_eV*e_chargenumber)
-    wavenumber = 2*scipy.pi
-    return(wavenumber*100, ' cm-1')
+    lbda =  planck * light_c / (en_float * e_chargenumber)
+    wavenumber = 1.0/(lbda*100)                     
+    return(wavenumber)
     
 def wavenumber_cm2energy_eV(wn):         #
     energy_eV = 2;
     return(energy_eV, ' eV')
     
 
-nm = energy_ev2lambda_nm(5.38)
-
-print(nm)
+# ncm = energy_ev2wavenumber_cm1('1.0')
+# print(ncm)
 
 
 def scalc(request):
-    if request.method == 'POST':
-        expression = request.POST['expression']
-        try:
-            result = energy_ev2lambda_nm(expression)
-        except SyntaxError:
-            result = 'Syntax error'
-        except ZeroDivisionError:
-            result = 'Cannot divide by zero.'
-        except ValueError:
-            result = 'Invalid input'
-        context = {'result': result}
+    context = {}
 
-    else:
-        context = {}
+    if request.method == 'POST':
+        if 'ev1' in request.POST:	
+            exp1 = request.POST['ev1']
+            try:
+                result1 = energy_ev2lambda_nm(exp1)
+            except SyntaxError:
+                result = 'Syntax error'
+            except ZeroDivisionError:
+                result = 'Cannot divide by zero.'
+            except ValueError:
+                result = 'Invalid input'
+            context = {'result1': result1}
+        elif 'ev2' in request.POST:
+            exp2 = request.POST['ev2']
+            try:
+                result2 = energy_ev2wavenumber_cm1(exp2)
+            except SyntaxError:
+                result = 'Syntax error'
+            except ZeroDivisionError:
+                result = 'Cannot divide by zero.'
+            except ValueError:
+                result = 'Invalid input'
+            context = {'result2': result2}
+        else:
+            context = {}
 
     return render(request, 'scalc.html', context)
