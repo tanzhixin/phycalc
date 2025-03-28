@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+<script>
+    document.querySelector(‘input[name=ev1]‘).addEventListener(‘keyup‘, function(e) {
+        if (e.key === ‘Enter‘) {
+            document.querySelector(‘button[type=submit]‘).click();
+        }
+    });
+</script>
+
+</head>
+<body>
+    <h2> 中子飞行时间计算: </h2>
+    <form method="post">
+      {% csrf_token %}
+      飞行距离：<input type="text" name="dist1" required>  (m) 
+      
+      中子能量：<input type="text" name="ev1" required>  (eV) 
+      
+      <button type="submit">计算</button>
+
+      <button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
+
+    </form>
+    <p>速度为(m/s): {{ velo1 }} </p>
+    <p>飞行时间为(s): {{ tof1 }} </p>
+
+</body>
+</html>
+
