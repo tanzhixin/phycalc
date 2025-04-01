@@ -17,10 +17,10 @@ def lambda_nm2energy_eV(lbda):               # input photon wavelength in nm
     planck = scipy.constants.Planck
     light_c = scipy.constants.speed_of_light
     e_chargenumber = scipy.constants.e
-    energy_eV = planck*light_c/(lbda*1.0e-9)/e_chargenumber
-    return(energy_eV, ' eV')
+    energy_eV = planck*light_c/( float(lbda)*1.0e-9)/e_chargenumber
+    return(energy_eV)
 
-def energy_ev2wavenumber_cm1(en_eV):         #
+def energy_ev2wavenumber_cm1(en_eV):    
     en_float = float(en_eV)
     planck = scipy.constants.Planck
     light_c = scipy.constants.speed_of_light
@@ -29,9 +29,10 @@ def energy_ev2wavenumber_cm1(en_eV):         #
     wavenumber = 1.0/(lbda*100)                     
     return(wavenumber)
     
-def wavenumber_cm2energy_eV(wn):         #
-    energy_eV = 2;
-    return(energy_eV, ' eV')
+def wavenumber_cm2energy_eV(wn):        
+    lbda = 1/(float(wn)*100)
+    energy_eV = lambda_nm2energy_eV(lbda)
+    return(energy_eV)
     
 
 # ncm = energy_ev2wavenumber_cm1('1.0')
@@ -110,6 +111,28 @@ def scalc(request):
             except ValueError:
                 result = 'Invalid input'
             context = {'result2': result2}
+        elif 'nm1' in request.POST:
+            wavelength1 = request.POST['nm1']
+            try:
+                result3 = lambda_nm2energy_eV(wavelength1)
+            except SyntaxError:
+                result = 'Syntax error'
+            except ZeroDivisionError:
+                result = 'Cannot divide by zero.'
+            except ValueError:
+                result = 'Invalid input'
+            context = {'result3': result3}
+        elif 'nm2' in request.POST:
+            wavelength2 = request.POST['nm2']
+            try:
+                result4 = wavenumber_cm2energy_eV(wavelength2)
+            except SyntaxError:
+                result = 'Syntax error'
+            except ZeroDivisionError:
+                result = 'Cannot divide by zero.'
+            except ValueError:
+                result = 'Invalid input'
+            context = {'result4': result4}
         else:
             context = {}
 

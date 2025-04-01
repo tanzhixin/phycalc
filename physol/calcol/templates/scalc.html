@@ -22,7 +22,7 @@
     </form>
     <p>结果为: {{ result1 }} nm</p>
 
-    <h2> 从能量(eV)计算波长(nm) </h2>
+    <h2> 从能量(eV)计算波数(cm-1) </h2>
     <form method="post">
       {% csrf_token %}
       <input type="text" name="ev2" required>
@@ -31,6 +31,26 @@
     </form>
     <p>结果为: {{ result2 }} cm-1</p>
 
+
+    <h2> 从波长(nm)计算能量(eV) </h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="nm1" required>
+      <button type="submit">计算</button>
+      <button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
+    </form>
+    <p>结果为: {{ result3 }} eV</p>
+
+    <h2> 从波长(nm)计算波数(cm-1) </h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="nm2" required>
+      <button type="submit">计算</button>
+      <button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
+    </form>
+    <p>结果为: {{ result4 }} cm-1</p>
+
+    
 </body>
 </html>
 
