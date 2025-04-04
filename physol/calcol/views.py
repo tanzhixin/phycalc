@@ -85,11 +85,11 @@ printanno()
 
 
 
-def scalc(request):
+def pcalc(request):
     context = {}
 
     if request.method == 'POST':
-        if 'ev1' in request.POST:	
+        if 'ev1' in request.POST:
             exp1 = request.POST['ev1']
             try:
                 result1 = energy_ev2lambda_nm(exp1)
@@ -136,8 +136,12 @@ def scalc(request):
         else:
             context = {}
 
-    return render(request, 'scalc.html', context)
+    return render(request, 'pcalc.html', context)
 
+
+def mcalc(request):
+    context = {}
+    return render(request, 'mcalc.html', context)
 
 def ncalc(request):
     context = {}

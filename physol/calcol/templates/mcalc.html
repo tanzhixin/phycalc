@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>科学计算器</title>
+    <style>
+      .calculator {
+	  margin: auto;
+          width: 600px;
+          text-align: center;
+          padding: 20px;
+          background: #f0f0f0;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      }
+      
+        #display {
+            width: 95%;
+            height: 60px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        button {
+	    width: 16%;
+	    margin: 6px;
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #fff;
+            transition: background 0.3s;
+        }
+
+	.main {
+	    margin: auto;
+	    padding: 10px;
+	}
+	
+        button:hover {
+            background: #ddd;
+        }
+
+        .operator {
+            background: #ff9500;
+            color: white;
+        }
+
+	input {
+	    color: #ACAF50;
+	    padding: 30px;
+	    width: 80%;
+	    font-size: 16px;
+	}
+	
+        .function {
+            background: #4a4a4a;
+            color: white;
+        }
+
+        .equals {
+            background: #007aff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator" align="center">
+	<h1> 科学计算器 </h1>
+
+        
+        <form method="post">
+	    {% csrf_token %}
+            <input type="text" id="result" name="result" value="{{result }}">
+            <br>            
+            <!-- 第一行：函数和操作 -->
+            <button class="function">sin</button>
+            <button class="function">cos</button>
+            <button class="function">tan</button>
+            <button class="function">log</button>
+            <button class="function">ln</button>
+            <br>            
+            <!-- 第二行：科学运算 -->
+            <button class="function">π</button>
+            <button class="function">e</button>
+            <button class="function">x²</button>
+            <button class="function">√</button>
+            <button class="function">!</button>
+	    <br>
+            <!-- 第三行：数字和基本运算 -->
+            <button onclick="appendToResult('7')">7</button>
+            <button onclick="appendToResult('8')">8</button>
+            <button onclick="appendToResult('9')">9</button>
+            <button onclick="appendToResult('/')">÷</button>
+            <button onclick="clearResult()">AC</button>
+	    <br>
+            <!-- 第四行 -->
+            <button onclick="appendToResult('4')">4</button>
+            <button onclick="appendToResult('5')">5</button>
+            <button onclick="appendToResult('6')">6</button>
+            <button onclick="appendToResult('*')">×</button>
+            <button class="operator">DEL</button>
+	    <br>
+            <!-- 第五行 -->
+            <button onclick="appendToResult('1')">1</button>
+            <button onclick="appendToResult('2')">2</button>
+            <button onclick="appendToResult('3')">3</button>
+            <button onclick="appendToResult('-')">-</button>
+            <button onclick="appendToResult('(')">(</button>
+	    <br>
+            <!-- 第六行 -->
+            <button onclick="appendToResult(0)" >0</button>
+            <button onclick="appendToResult('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToResult('+')">+</button>
+            <button onclick="appendToResult(')')">)</button>
+        </div>
+    </div>
+
+    <script>
+        // Update JavaScript functions to handle form submission
+        function appendToResult(value) {
+            document.getElementById('result').value += value;
+        }
+
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+
+        function calculate() {
+            try {
+                document.getElementById('result').value = eval(document.getElementById('result').value);
+            } catch (error) {
+                document.getElementById('result').value = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
