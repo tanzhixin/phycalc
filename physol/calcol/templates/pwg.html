@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>password generator</title>
+</head>
+<body>
+  <h1> 密码生成器 </h1>
+  <form method="post">
+    {% csrf_token %}
+    密匙长度：<input type="text" name="lenz" value="{{12}}"  required> 
+    <button type="submit">生成</button>
+  <p>生成密码为：{{pswd}} </p>
+</body>
+</html>

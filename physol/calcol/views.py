@@ -5,6 +5,10 @@ import math
 import scipy
 import scipy.constants
 
+from passlib import pwd
+
+
+
 def energy_ev2lambda_nm(en_eV):              # input photo energy in eV
     en_float = float(en_eV)
     planck = scipy.constants.Planck
@@ -142,6 +146,15 @@ def pcalc(request):
 def mcalc(request):
     context = {}
     return render(request, 'mcalc.html', context)
+
+
+def pwg(request):
+    pswd = "123456"
+    lenz = 12
+    if request.method == 'POST':
+        lenz = int(request.POST['lenz'])
+        pswd = pwd.genword(length=lenz, charset='ascii_62')
+    return render(request, 'pwg.html', {"pswd":pswd})
 
 def ncalc(request):
     context = {}
