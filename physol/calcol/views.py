@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.conf import settings
+
+
 
 # Create your views here.
 import math
 import scipy
 import scipy.constants
-
 from passlib import pwd
 
 
@@ -149,12 +151,17 @@ def mcalc(request):
 
 
 def pwg(request):
+    history = request.session.get('history', [])
     pswd = "123456"
     lenz = 12
     if request.method == 'POST':
         lenz = int(request.POST['lenz'])
         pswd = pwd.genword(length=lenz, charset='ascii_62')
-    return render(request, 'pwg.html', {"pswd":pswd})
+        history.insert(0, pswd)
+        if len(history)>8:
+            history = history[:8]
+        request.session['history'] = history 
+    return render(request, 'pwg.html', {"pswd":history})
 
 def ncalc(request):
     context = {}

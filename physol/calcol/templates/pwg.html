@@ -9,6 +9,16 @@
     {% csrf_token %}
     密匙长度：<input type="text" name="lenz" value="{{12}}"  required> 
     <button type="submit">生成</button>
-  <p>生成密码为：{{pswd}} </p>
+  <p>生成密码为： </p>
+  {% if pswd %}
+  <ul>
+    {% for password in pswd %}
+    <li>{{ password }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>暂无历史记录</p>
+  {% endif %}
+    
 </body>
 </html>
