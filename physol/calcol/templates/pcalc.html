@@ -37,7 +37,7 @@
       {% csrf_token %}
       <input type="text" name="nm1" required>
       <button type="submit">计算</button>
-      <button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
+      <button type="button", onclick="document.querySelector('input[name=nm1]').value = ''"> 清空 </button>
     </form>
     <p>结果为: {{ result3 }} eV</p>
 
@@ -46,9 +46,28 @@
       {% csrf_token %}
       <input type="text" name="nm2" required>
       <button type="submit">计算</button>
-      <button type="button", onclick="document.querySelector('input[name=ev1]').value = ''"> 清空 </button>
+      <button type="button", onclick="document.querySelector('input[name=nm2]').value = ''"> 清空 </button>
     </form>
     <p>结果为: {{ result4 }} cm-1</p>
+
+    
+    <h2> 从波数(cm-1)计算能量(eV) </h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="wn1" required>
+      <button type="submit">计算</button>
+      <button type="button", onclick="document.querySelector('input[name=wn1]').value = ''"> 清空 </button>
+    </form>
+    <p>结果为: {{ result5 }} eV</p>
+
+    <h2> 从波数(cm-1)计算波长(nm) </h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="wn2" required>
+      <button type="submit">计算</button>
+      <button type="button", onclick="document.querySelector('input[name=wn2]').value = ''"> 清空 </button>
+    </form>
+    <p>结果为: {{ result6 }} nm</p>
 
     
 </body>
